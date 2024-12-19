@@ -17,7 +17,7 @@ class AppTheme {
   static const Color onpoints = Color(0xff4F1A75);
   static const Color offprogress = Color(0xffD9D9D9);
   static const Color bookbg = Color(0xffE9D3EA);
-  static const Color bgcontainer = Color(0xffD9D9D9);
+
 
   static const Color whitecolor = Color(0xFFFFFFFF);
   static const Color blackcolor = Color(0xFF090909);
@@ -38,6 +38,38 @@ class AppTheme {
   static const Color bookcolor = Color(0xffe8e7e7);
   static const Color articlebgcolor = Color(0xfff8f8f8);
   static const Color awardbgcolor = Color(0xffD9D9D9);
+  static const Color grey = Color(0xff787D84);
+  static const Color bgcontainer = Color(0xffF4F4F4);
+  static const Color deliverygrey = Color(0xffF3F3F3);
+  static const Color continueshopping = Color(0xffD7D7D7);
+  static const Color greencolor = Color(0xff459512);
+  static const Color greenbuttoncolor = Color(0xff3CB325);
+  static const Color greentextcolor = Color(0xff6DC03C);
+  static const Color greyboxcolor = Color(0xffD9D9D947);
+  static const Color dotcolor = Color(0xffE0E0E0);
+  static const Color producttextcolor = Color(0xff444444);
+  static const Color amountcolor = Color(0xff5F5E5E);
+  static const Color bluecolor = Color(0xff1992F5);
+  static const Color delivery = Color(0xff707070);
+  static const Color containerbg = Color(0xffFBFBFB);
+  static const Color container1bg = Color(0xffFAFAFA);
+  static const Color quizbackground = Color(0xffEBEBEB);
+  static const Color shopcardbackground = Color(0xffEDEDED);
+  static const Color categoriescolor = Color(0xff616160);
+  static const Color multichoicecolor = Color(0xff5D6064);
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -55,6 +87,7 @@ class AppTheme {
   static const Color magazinetextcolor = Color(0xff686161);
   static const Color seeallcolor = Color(0xffa19d9d);
   static const Color coretextcolor = Color(0xff787D84);
+
 
 
 

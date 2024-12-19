@@ -82,6 +82,23 @@ flutter:
       fonts:
         - asset: assets/fonts/Barani.ttf
           style: normal
+    - family: Kottaone  # The name you will use in the TextStyle
+      fonts:
+        - asset: assets/fonts/KottaOne-Regular.ttf
+          style: normal
+    - family: PoppinsSemibold  # The name you will use in the TextStyle
+      fonts:
+        - asset: assets/fonts/Poppins-SemiBold.ttf
+          style: normal
+    - family: PoppinsMedium  # The name you will use in the TextStyle
+      fonts:
+        - asset: assets/fonts/Poppins-Medium.ttf
+          style: normal
+    - family: Roboto  # The name you will use in the TextStyle
+      fonts:
+        - asset: assets/fonts/Roboto-Regular.ttf
+          style: normal
+
 
 
 
@@ -98,6 +115,7 @@ flutter:
     - assets/images/Books-Wrapper/final/2023/
     - assets/images/Membership Avator/
     - assets/audio/welcome-madagascar-184168.mp3
+    - assets/images/paymentimage/
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

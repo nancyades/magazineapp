@@ -58,5 +58,25 @@ class CustomNavigationBar extends StatelessWidget {
 
 
 
+class DashLinePainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    Paint paint = Paint()
+      ..color = Colors.grey
+      ..strokeWidth = 1;
+
+    double dashWidth = 5;
+    double dashSpace = 3;
+    double startX = 0;
+
+    while (startX < size.width) {
+      canvas.drawLine(Offset(startX, 0), Offset(startX + dashWidth, 0), paint);
+      startX += dashWidth + dashSpace;
+    }
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) => false;
+}
 
 

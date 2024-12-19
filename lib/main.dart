@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
         theme: ThemeData(
           fontFamily: 'Poppins',
-          colorScheme: ColorScheme.fromSeed(seedColor: AppTheme.corecolor),
+         // colorScheme: ColorScheme.fromSeed(seedColor: AppTheme.whitecolor),
           useMaterial3: true,
         ),
       initialRoute: '/',

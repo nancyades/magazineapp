@@ -1,3 +1,4 @@
+import 'package:aanma_nalam/View/signupscreens/forgotconfrimemailscreen.dart';
 import 'package:aanma_nalam/constant/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -137,7 +138,7 @@ class _ConfirmEmailScreenState extends State<ConfirmEmailScreen> {
                             ),
                           ),
                           onPressed: () {
-                            Get.toNamed('/signupscreen');
+                            Get.to(ConfrimationEmail());
                           },
                           child: const Text(
                             'Continue',

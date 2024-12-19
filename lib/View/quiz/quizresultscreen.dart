@@ -1,4 +1,5 @@
 import 'package:aanma_nalam/Controllers/quizcontroller.dart';
+import 'package:aanma_nalam/View/quiz/changllengescoreboard.dart';
 import 'package:aanma_nalam/constant/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
@@ -24,15 +25,16 @@ class _QuizScoreScreenState extends State<QuizScoreScreen> {
           // Quiz result content
           Column(
             children: [
-              SizedBox(height: 100,),
+              SizedBox(height: 75,),
               Text(
                 'Quiz Result',
                 style: TextStyle(
                     fontFamily: 'Poppins',
-                    fontSize: 25,
+                    fontSize: 23,
                     color: AppTheme.whitecolor,
                     fontWeight: FontWeight.bold),
               ),
+              SizedBox(height: 35,),
               // Emoji Image
               Image.network(
                 quizController.score.value >= 25 ?
@@ -41,19 +43,19 @@ class _QuizScoreScreenState extends State<QuizScoreScreen> {
                 height: 150,
                 width: 150,
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 30),
 
 
               Text(
                 quizController.score.value >= 25 ?
                 "Completed!": "Better luck next time!",
                 style: TextStyle(
-                  fontSize: 25,
+                  fontFamily: 'Kottaone',
+                  fontSize: 26,
                   color: AppTheme.whitecolor,
-                  fontStyle: FontStyle.italic,
                 ),
               ),
-              SizedBox(height: 30),
+              SizedBox(height: 40),
               // Earned Coins Section
               _buildEarnedCoins(),
               SizedBox(height: 50),
@@ -74,7 +76,7 @@ class _QuizScoreScreenState extends State<QuizScoreScreen> {
       children: [
         Container(
           width: 250,
-          height: 30,
+          height: 33,
           decoration: BoxDecoration(
             color: Colors.yellow[700],
             borderRadius: BorderRadius.circular(10),
@@ -84,7 +86,7 @@ class _QuizScoreScreenState extends State<QuizScoreScreen> {
               'EARNED COINS',
               style: TextStyle(
                   fontFamily: 'Poppins',
-                  fontSize: AppTheme.mediumFontSize,
+                  fontSize: 20,
                   color: AppTheme.whitecolor,
                   fontWeight: FontWeight.bold),
             ),
@@ -94,7 +96,7 @@ class _QuizScoreScreenState extends State<QuizScoreScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              width: 150,
+              width: 140,
               height: 50,
               decoration: BoxDecoration(
                 color: AppTheme.whitecolor,
@@ -107,13 +109,13 @@ class _QuizScoreScreenState extends State<QuizScoreScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.only(bottom: 8.0, left: 8),
                     child: Text(
                         quizController.score.value.toString(),
                         style: TextStyle(
                           fontFamily: 'Poppins',
                           fontSize: AppTheme.extralargeFontSize,
-                          color: AppTheme.whitecolor,
+                          color: AppTheme.coretextcolor,
                           fontWeight: FontWeight.w800,
                         )
                     ),
@@ -123,6 +125,7 @@ class _QuizScoreScreenState extends State<QuizScoreScreen> {
                     child: Image.asset(
                       "assets/images/icons/threegoldcoins.png",
                       fit: BoxFit.contain,
+
                     ),
                   ),
 
@@ -140,7 +143,7 @@ class _QuizScoreScreenState extends State<QuizScoreScreen> {
     return Column(
       children: [
         Container(
-          width: 150,
+          width: 170,
           height: 50,
           decoration: BoxDecoration(
             color: Colors.yellow[700],
@@ -155,7 +158,7 @@ class _QuizScoreScreenState extends State<QuizScoreScreen> {
               Text(
                 'LEVEL 1',
                 style: TextStyle(
-                  fontSize: 25,
+                  fontSize: 23,
                   fontWeight: FontWeight.bold,
                   color: AppTheme.whitecolor,
                 ),
@@ -164,8 +167,8 @@ class _QuizScoreScreenState extends State<QuizScoreScreen> {
           ),
         ),
         Container(
-          width: 250,
-          height: 90,
+          width: 240,
+          height: 80,
           decoration: BoxDecoration(
             color: AppTheme.whitecolor,
             borderRadius: BorderRadius.circular(10),
@@ -177,7 +180,8 @@ class _QuizScoreScreenState extends State<QuizScoreScreen> {
               Text(
                 'TIME TAKEN',
                 style: TextStyle(
-                  color: Colors.red,
+                  fontSize: 14,
+                  color: AppTheme.corecolor,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -187,7 +191,7 @@ class _QuizScoreScreenState extends State<QuizScoreScreen> {
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
-                  color: Colors.black,
+                  color: AppTheme.grey,
                 ),
               ),
             ],
@@ -200,20 +204,41 @@ class _QuizScoreScreenState extends State<QuizScoreScreen> {
   }
 
   Widget _buildBackButton() {
-    return ElevatedButton(
+    return quizController.accept.value == true ?
+
+    ElevatedButton(
+      onPressed: () {
+        Get.to(Changllengescoreboard());
+      },
+      style: ElevatedButton.styleFrom(
+        backgroundColor: AppTheme.grey,
+
+        padding: EdgeInsets.symmetric(horizontal: 65, vertical: 10),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(25),
+        ),
+
+      ),
+      child: Text(
+        'Opponent Turn',
+        style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w700),
+      ),
+    )
+
+     : ElevatedButton(
       onPressed: () {
         Get.offNamed("/levels");
       },
       style: ElevatedButton.styleFrom(
         backgroundColor: Colors.grey[700],
-        padding: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+        padding: EdgeInsets.symmetric(horizontal: 65, vertical: 10),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
         ),
       ),
       child: Text(
         'Back',
-        style: TextStyle(color: Colors.white, fontSize: 20),
+        style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w700),
       ),
     );
   }
@@ -253,7 +278,12 @@ class _AnimatedBackgroundState extends State<AnimatedBackground> with SingleTick
       animation: _controller,
       builder: (context, child) {
         return Container(
-          color: AppTheme.corecolor,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/images/icons/backgrounddecrotaion.png'), // Replace with your image path
+              fit: BoxFit.cover, // Adjust how the image fits the container
+            ),
+          ),
           child: Stack(
             children: _shapes.map((shape) {
               return Positioned(
@@ -274,6 +304,7 @@ class _AnimatedBackgroundState extends State<AnimatedBackground> with SingleTick
             }).toList(),
           ),
         );
+
       },
     );
   }

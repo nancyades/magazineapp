@@ -1,9 +1,13 @@
 import 'package:aanma_nalam/Controllers/quizcontroller.dart';
 import 'package:aanma_nalam/constant/app_theme.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 class QuizScreen extends StatefulWidget {
+
+  QuizScreen({super.key,});
   @override
   _QuizScreenState createState() => _QuizScreenState();
 }
@@ -52,7 +56,7 @@ class _QuizScreenState extends State<QuizScreen> with SingleTickerProviderStateM
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[300],
+     // backgroundColor: Colors.grey[300],
 
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -72,34 +76,40 @@ class _QuizScreenState extends State<QuizScreen> with SingleTickerProviderStateM
                 children: [
                   // "Choose Level" Text
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      // "Choose Level" Text
-                      Row(
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                              Get.back();
-                            },
-
+                      GestureDetector(
+                        onTap: () {
+                          Get.back();
+                        },
+                        child: Container(
+                          width: 30,
+                          height: 30,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Center(
                             child: Image.asset(
                               'assets/images/icons/Vector.png', // Ensure correct path
                               width: 15,
-                              height: 15,
+                              height: 20,
+                              fit: BoxFit.contain,
                             ),
                           ),
-                          SizedBox(
-                            width: 20,
-                          ),
-                          Text(
-                            'Level 1',
-                            style: TextStyle(
-                              fontSize: AppTheme.mediumFontSize,
-                              fontWeight: FontWeight.w800,
-                              color: AppTheme.seeallcolor,
-                            ),
-                          ),
-                        ],
+                        ),
+                      ),
+
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Text(
+                        'Level : 1',
+                        style: TextStyle(
+                          fontFamily: 'PoppinsSemibold',
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                          color: AppTheme.grey,
+                        ),
                       ),
                     ],
                   ),
@@ -114,17 +124,18 @@ class _QuizScreenState extends State<QuizScreen> with SingleTickerProviderStateM
                             padding: EdgeInsets.symmetric(horizontal: 4.0, vertical: 2.0),
                             decoration: BoxDecoration(
                               color: Colors.grey[200],
-                              borderRadius: BorderRadius.circular(8.0),
+                              borderRadius: BorderRadius.circular(10.0),
                             ),
                             constraints: BoxConstraints(
-                              minWidth: 20,
-                              minHeight: 20,
+                              minWidth: 23,
+                              minHeight: 23,
                             ),
                             child: Text(
                               quizController.score.value.toString(),
                               style: TextStyle(
-                                color: Colors.red,
-                                fontSize: 13,
+                                fontFamily: 'PoppinsMedium',
+                                color: AppTheme.grey,
+                                fontSize: 15,
                                 fontWeight: FontWeight.bold,
                               ),
                               textAlign: TextAlign.center,
@@ -165,8 +176,16 @@ class _QuizScreenState extends State<QuizScreen> with SingleTickerProviderStateM
           ),
           // Progress bar and timer section
           Container(
-            height: 120,
-            color: Colors.grey[200],
+
+            height: 130,
+            decoration: BoxDecoration(
+              color: Colors.grey[200],
+              borderRadius: BorderRadius.circular(10), // Rounded corners
+              border: Border.all(
+                color: Colors.grey, // Border color
+                width: 0.1, // Border width
+              ),
+            ),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
               child: Column(
@@ -177,15 +196,15 @@ class _QuizScreenState extends State<QuizScreen> with SingleTickerProviderStateM
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(
-                          Icons.alarm_sharp,
-                          size: 30,
-                          color: AppTheme.coretextcolor,
+                        Image.asset(
+                          'assets/images/icons/timer.png',
+                          width: 30,
+                          height: 30,
                         ),
                         Obx(() => Padding(
-                          padding: const EdgeInsets.only(left: 8.0),
+                          padding: const EdgeInsets.only(left: 6.0, top: 8),
                           child: Text(
-                            quizController.timeTaken.value, // Display the formatted time
+                            quizController.timeTaken.value,
                             style: TextStyle(
                                 fontFamily: 'Poppins',
                                 letterSpacing: 0.9,
@@ -200,168 +219,251 @@ class _QuizScreenState extends State<QuizScreen> with SingleTickerProviderStateM
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: List.generate(quizController.questions.length,  (index) {
+                    children: List.generate(quizController.questions.length, (index) {
                       return Row(
                         children: [
                           CircleAvatar(
-                            radius: 15,
-                            backgroundColor: quizController.currentQuestionIndex.value == index ? AppTheme.corecolor : Colors.white,
+                            radius: Get.width * 0.03, // Dynamic radius based on screen width
+                            backgroundColor: quizController.currentQuestionIndex.value == index
+                                ? AppTheme.corecolor
+                                : Colors.white,
                             child: Text(
                               (index + 1).toString(),
-                              style: TextStyle(color:  quizController.currentQuestionIndex.value == index ? Colors.white : Colors.grey),
+                              style: TextStyle(
+                                fontSize: Get.width * 0.035, // Dynamic font size
+                                fontWeight: FontWeight.w600,
+                                color: quizController.currentQuestionIndex.value == index
+                                    ? Colors.white
+                                    : AppTheme.grey,
+                              ),
                             ),
                           ),
-                          if (index != 4)
+                          if (index != quizController.questions.length - 1) // Ensures no trailing connector for the last item
                             Container(
-                              height: 2,
-                              width: 50,
-                              color: quizController.currentQuestionIndex.value > index ? AppTheme.corecolor : Colors.grey,
+                              height: Get.height * 0.005, // Dynamic height for the connector
+                              width: Get.width * 0.15, // Dynamic width for the connector
+                              color: quizController.currentQuestionIndex.value > index
+                                  ? AppTheme.corecolor
+                                  : AppTheme.grey,
                             ),
                         ],
                       );
                     }),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Question ${quizController.currentQuestionIndex.value + 1}",
-                        style: TextStyle(
-                          fontFamily: 'Poppins',
-                          fontSize: AppTheme.verySmallFontSize,
-                          color: AppTheme.corecolor,
-                          fontWeight: FontWeight.w400,
-                          fontStyle: FontStyle.italic,
-                        ),
-                      ),
-                      Text(
-                        'Question ${quizController.currentQuestionIndex.value + 1} out of $_totalQuestions',
-                        style: TextStyle(
-                          fontFamily: 'Poppins',
-                          fontSize: AppTheme.verySmallFontSize,
-                          color: AppTheme.corecolor,
-                          fontWeight: FontWeight.w400,
-                          fontStyle: FontStyle.italic,
-                        ),
-                      ),
-                    ],
-                  ),
 
+
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.center,
+                  //   children: List.generate(quizController.questions.length, (index) {
+                  //     return Row(
+                  //       children: [
+                  //         CircleAvatar(
+                  //           radius: 10,
+                  //           backgroundColor: quizController.currentQuestionIndex.value == index
+                  //               ? AppTheme.corecolor
+                  //               : Colors.white,
+                  //           child: Text(
+                  //             (index + 1).toString(),
+                  //             style: TextStyle(
+                  //                 fontSize: 13,
+                  //
+                  //                 fontWeight: FontWeight.w600,
+                  //
+                  //                 color: quizController.currentQuestionIndex.value == index
+                  //                     ? Colors.white
+                  //                     : AppTheme.grey),
+                  //           ),
+                  //         ),
+                  //         if (index != 4)
+                  //           Container(
+                  //             height: 2.5,
+                  //             width: 65,
+                  //             color: quizController.currentQuestionIndex.value > index
+                  //                 ? AppTheme.corecolor
+                  //                 : AppTheme.grey,
+                  //           ),
+                  //       ],
+                  //     );
+                  //   }),
+                  // ),
+
+
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 18.0),
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Question ${quizController.currentQuestionIndex.value + 1}",
+                            style: TextStyle(
+                              fontFamily: 'Kottaone',
+                              fontSize: 13,
+                              color: AppTheme.corecolor,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          Text(
+                            'Question ${quizController.currentQuestionIndex.value + 1} out of $_totalQuestions',
+                            style: TextStyle(
+                              fontFamily: 'Kottaone',
+                              fontSize: 11,
+                              color: AppTheme.corecolor,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
           ),
-           Container(
-               height: 40,
+
+          Container(
+               height: 30,
              width: Get.width,
              color: AppTheme.whitecolor,
-
            ),
 
-          Obx(() {
-            if (quizController.isLoading.value) {
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
                 children: [
-                  SizedBox(
-                    height: 200,
-                  ),
-                  Center(child: CircularProgressIndicator()),
-                ],
-              );
-            } else if (quizController.questions.isEmpty) {
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  SizedBox(
-                    height: 200,
-                  ),
-                  Center(child: Text('No questions found.')),
-                ],
-              );
-
-            } else {
-              var question = quizController.questions[quizController.currentQuestionIndex.value];
-
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Center(
-                            child: Text(
-                              question.question,
-                              style: TextStyle(
-                                fontSize: AppTheme.mediumFontSize,
-                                fontWeight: FontWeight.w800,
-                                color: AppTheme.corecolor,
-                              ),
+                  Container(
+                    height: Get.height * 0.6740,
+                    decoration: BoxDecoration(
+                      color: AppTheme.quizbackground,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(10.0), // Adjust the radius as needed
+                        topRight: Radius.circular(10.0), // Adjust the radius as needed
+                      ),
+                    ),
+                    child: Obx(() {
+                      if (quizController.isLoading.value) {
+                        return Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            SizedBox(
+                              height: 200,
                             ),
-                          ),
-                        ),
-                        SizedBox(height: 20),
-                        ...quizController.shuffledAnswers.map((answer) {
-                          bool isIncorrect = quizController.incorrectAnswers.contains(answer);
-                          bool isSelected = quizController.selectedAnswer.value == answer;
+                            Center(child: CircularProgressIndicator()),
+                          ],
+                        );
+                      } else if (quizController.questions.isEmpty) {
+                        return Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            SizedBox(
+                              height: 200,
+                            ),
+                            Center(child: Text('No questions found.')),
+                          ],
+                        );
+                      } else {
+                        var question = quizController.questions[quizController.currentQuestionIndex.value];
 
-                          return AnimatedBuilder(
-                            animation: quizController.swingController,
-                            builder: (context, child) {
-                              return Transform(
-                                transform: isSelected && !quizController.isAnswerCorrect.value
-                                    ? Matrix4.rotationZ(quizController.swingAnimation.value)
-                                    : Matrix4.identity(),
-                                child:
-
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      padding: EdgeInsets.symmetric(vertical: 20),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(8.0),
+                        return Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 16.0, left: 8, right: 8),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color: AppTheme.awardbgcolor,
+                                        borderRadius: BorderRadius.circular(10.0), // Adjust the radius as needed for rounder corners
                                       ),
-                                      backgroundColor: isSelected
-                                          ? (quizController.isAnswerCorrect.value
-                                          ? Colors.green
-                                          : Colors.red)
-                                          : isIncorrect
-                                          ? Colors.red
-                                          : AppTheme.whitecolor,
-                                    ),
-                                    onPressed: () {
-                                      quizController.checkAnswer(answer);
-                                    },
-                                    child: Text(
-                                      answer,
-                                      style: TextStyle(color: isSelected
-                                          ? (quizController.isAnswerCorrect.value
-                                          ? AppTheme.whitecolor
-                                          : AppTheme.whitecolor)
-                                          : isIncorrect
-                                          ? AppTheme.whitecolor
-                                          :AppTheme.coretextcolor,
-
-                                          fontSize: 18),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(25.0),
+                                        child: Center(
+                                          child: Text(
+                                            question.question,
+                                            style: TextStyle(
+                                              fontFamily: 'PoppinsSemibold',
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold,
+                                              color: AppTheme.corecolor,
+                                            ),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                        ),
+                                      ),
                                     ),
                                   ),
-                                )
-                              );
-                            },
-                          );
-                        }),
-                      ],
-                    ),
+
+                                  SizedBox(height: 30),
+                                  ...quizController.shuffledAnswers.map((answer) {
+                                    bool isIncorrect = quizController.incorrectAnswers.contains(answer);
+                                    bool isSelected = quizController.selectedAnswer.value == answer;
+
+                                    return AnimatedBuilder(
+                                      animation: quizController.swingController,
+                                      builder: (context, child) {
+                                        return Transform(
+                                          transform: isSelected && !quizController.isAnswerCorrect.value
+                                              ? Matrix4.rotationZ(quizController.swingAnimation.value)
+                                              : Matrix4.identity(),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(7.0),
+                                            child: GestureDetector(
+                                              onTap: () {
+                                                quizController.checkAnswer(answer);
+                                              },
+                                              child: Container(
+                                                height: 65,
+                                                padding: EdgeInsets.symmetric(vertical: 20),
+                                                decoration: BoxDecoration(
+                                                  color: isSelected
+                                                      ? (quizController.isAnswerCorrect.value ? Colors.green : Colors.red)
+                                                      : isIncorrect
+                                                      ? Colors.red
+                                                      : AppTheme.whitecolor,
+                                                  borderRadius: BorderRadius.circular(8.0),
+                                                ),
+                                                child: Center(
+                                                  child: Padding(
+                                                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                                    child: Text(
+                                                      answer,
+                                                      style: TextStyle(
+                                                        fontFamily: 'Poppins',
+                                                        color: isSelected
+                                                            ? (quizController.isAnswerCorrect.value
+                                                            ? AppTheme.whitecolor
+                                                            : AppTheme.whitecolor)
+                                                            : isIncorrect
+                                                            ? AppTheme.whitecolor
+                                                            : AppTheme.coretextcolor,
+                                                        fontSize: 18,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    );
+                                  }),
+                                ],
+                              ),
+                            ),
+                          ],
+                        );
+                      }
+                    }),
                   ),
                 ],
-              );
-            }
-          }),
+              ),
+            ),
+          ),
+
 
 
         ],

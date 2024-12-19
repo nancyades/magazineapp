@@ -1,3 +1,4 @@
+import 'package:aanma_nalam/View/signupscreens/forgotpasswordscreens.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -123,7 +124,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     ),
                                     GestureDetector(
                                       onTap: () {
-                                        // Handle forgot password
+                                        Get.to(ForgotPasswordScreen());
                                       },
                                       child: const Text(
                                         "Forgot password",

@@ -19,6 +19,8 @@ class QuizController extends GetxController with SingleGetTickerProviderMixin {
   var timeTaken = ''.obs;
   var showCoinImage = false.obs; // Flag to manage coin image display
 
+  var accept = false.obs;
+
   late AnimationController swingController;
   late AnimationController coinController;
   late Animation<double> swingAnimation;

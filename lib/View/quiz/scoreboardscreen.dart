@@ -171,7 +171,7 @@ class _ScoreboardState extends State<Scoreboard> {
                 ),
                 SizedBox(
                   width: 250,
-                  child: ElevatedButton(
+                  child:  ElevatedButton(
                     onPressed: () {
                       Get.offNamed("/levels");
                     },
